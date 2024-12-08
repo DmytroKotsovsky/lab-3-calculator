@@ -1,0 +1,43 @@
+name: Node.js CI/CD for Calculator Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-calculator:
+    name: Run Calculator Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies for Testing
+        run: npm install
+
+      - name: Execute Tests
+        run: npx jest
+
+  lint-calculator:
+    name: Lint Calculator Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install ESLint for Linting
+        run: npm install eslint --save-dev
+
+      - name: Lint JavaScript Files
+        run: npx eslint .
